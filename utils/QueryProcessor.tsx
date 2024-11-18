@@ -92,6 +92,29 @@ export default function QueryProcessor(query: string): string {
       return minus.toString(); // Retornamos el resultado como una cadena
     }
   }
+
+  if (/Which of the following numbers are primes: (.+?)\?/.test(query)) {
+    // Extraemos los números de la pregunta
+    const match = query.match(/Which of the following numbers are primes: (.+?)\?/);
+    const numbersString = match ? match[1] : "";
+    const numbers = numbersString.split(",").map(num => parseInt(num.trim(), 10));
+  
+    // Función para verificar si un número es primo
+    const isPrime = (num: number) => {
+      if (num <= 1) return false; // Los números menores o iguales a 1 no son primos
+      for (let i = 2; i <= Math.sqrt(num); i++) {
+        if (num % i === 0) return false; // Si es divisible por algún número menor a su raíz cuadrada
+      }
+      return true;
+    };
+  
+    // Filtramos los números primos
+    const primes = numbers.filter(isPrime);
+  
+    // Retornamos los números primos separados por comas
+    return primes.length > 0 ? primes.join(", ") : "No prime numbers found";
+  }
+  
   
   
   

@@ -75,5 +75,13 @@ describe("QueryProcessor", () => {
     	));
     });
 
+    test('should return minus of numbers', () => {
+        const query = "Which of the following numbers are primes: 81, 73, 96, 67, 66?";
+        const response: string = QueryProcessor(query);
+        expect(response).toBe((
+		"73, 67"
+    	));
+    });
+
    
 });
