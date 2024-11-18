@@ -61,21 +61,24 @@ export default function QueryProcessor(query: string): string {
 
   if (/Which of the following numbers is both a square and a cube: (.+?)\?/.test(query)) {
     // Extraemos los números de la pregunta
-    const numbersString = query.match(/Which of the following numbers is both a square and a cube: (.+?)\?/)[1];
+    const match = query.match(/Which of the following numbers is both a square and a cube: (.+?)\?/);
+    const numbersString = match ? match[1] : "";
     const numbers = numbersString.split(",").map(num => parseInt(num.trim(), 10));
   
     // Verificamos si es cuadrado perfecto y cubo perfecto
-    const isSquareAndCube = num => {
-      const sqrt = Math.sqrt(num);       // Raíz cuadrada
-      const cbrt = Math.cbrt(num);       // Raíz cúbica
+    const isSquareAndCube = (num: number) => {
+      const sqrt = Math.sqrt(num); // Raíz cuadrada
+      const cbrt = Math.cbrt(num); // Raíz cúbica
       return Number.isInteger(sqrt) && Number.isInteger(cbrt); // Ambas deben ser enteras
     };
   
+    // Filtramos los números que cumplen la condición
     const results = numbers.filter(isSquareAndCube);
     
     // Retornamos los resultados separados por comas
-    return results.join(", ");
+    return results.length > 0 ? results.join(", ") : "No numbers found";
   }
+  
 
   if (/What is (\d+) minus (\d+)\?/.test(query)) {
     // Extraemos los dos números de la pregunta usando la expresión regular

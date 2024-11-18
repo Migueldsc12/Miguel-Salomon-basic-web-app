@@ -63,7 +63,7 @@ describe("QueryProcessor", () => {
         const query = "Which of the following numbers is both a square and a cube: 2397, 3481, 2500, 4690, 1367, 64, 216?";
         const response: string = QueryProcessor(query);
         expect(response).toBe((
-		"64, 216"
+		"64"
     	));
     });
 
