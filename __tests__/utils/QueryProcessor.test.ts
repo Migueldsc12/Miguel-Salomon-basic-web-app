@@ -28,10 +28,28 @@ describe("QueryProcessor", () => {
     });
 
     test('should return my name', () => {
-        const query = "What is your name?";
+        const query = "what is your name?";
         const response: string = QueryProcessor(query);
         expect(response).toBe((
 		"Miguel"
     	));
     });
+
+    test('should return largest number', () => {
+        const query = "Which of the following numbers is the largest: 30, 92, 43?";
+        const response: string = QueryProcessor(query);
+        expect(response).toBe((
+		"92"
+    	));
+    });
+
+    test('should return sum of numbers', () => {
+        const query = "What is 99 plus 55?";
+        const response: string = QueryProcessor(query);
+        expect(response).toBe((
+		"154"
+    	));
+    });
+
+   
 });
