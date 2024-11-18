@@ -45,6 +45,20 @@ export default function QueryProcessor(query: string): string {
       return sum.toString(); // Retornamos el resultado como una cadena
     }
   }
+
+  if (/What is (\d+) multiplied by (\d+)\?/.test(query)) {
+    // Extraemos los dos números de la pregunta usando la expresión regular
+    const match = query.match(/What is (\d+) multiplied by (\d+)\?/);
+    if (match) {
+      const [, num1, num2] = match;
+      
+      // Convertimos los números extraídos a enteros y calculamos la multiplicación
+      const product = parseInt(num1, 10) * parseInt(num2, 10);
+      
+      return product.toString(); // Retornamos el resultado como una cadena
+    }
+  }
+  
   
   
 

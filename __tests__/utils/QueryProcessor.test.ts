@@ -51,5 +51,13 @@ describe("QueryProcessor", () => {
     	));
     });
 
+    test('should return mult of numbers', () => {
+        const query = "What is 56 multiplied by 4?";
+        const response: string = QueryProcessor(query);
+        expect(response).toBe((
+		"224"
+    	));
+    });
+
    
 });
