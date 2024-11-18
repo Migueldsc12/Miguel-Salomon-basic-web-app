@@ -59,5 +59,21 @@ describe("QueryProcessor", () => {
     	));
     });
 
+    test('should return sqare', () => {
+        const query = "Which of the following numbers is both a square and a cube: 2397, 3481, 2500, 4690, 1367, 64, 216?";
+        const response: string = QueryProcessor(query);
+        expect(response).toBe((
+		"64, 216"
+    	));
+    });
+
+    test('should return minus of numbers', () => {
+        const query = "What is 26 minus 2?";
+        const response: string = QueryProcessor(query);
+        expect(response).toBe((
+		"24"
+    	));
+    });
+
    
 });

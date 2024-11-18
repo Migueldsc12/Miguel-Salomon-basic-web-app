@@ -58,6 +58,41 @@ export default function QueryProcessor(query: string): string {
       return product.toString(); // Retornamos el resultado como una cadena
     }
   }
+
+  if (/Which of the following numbers is both a square and a cube: (.+?)\?/.test(query)) {
+    // Extraemos los números de la pregunta
+    const numbersString = query.match(/Which of the following numbers is both a square and a cube: (.+?)\?/)[1];
+    const numbers = numbersString.split(",").map(num => parseInt(num.trim(), 10));
+  
+    // Verificamos si es cuadrado perfecto y cubo perfecto
+    const isSquareAndCube = num => {
+      const sqrt = Math.sqrt(num);       // Raíz cuadrada
+      const cbrt = Math.cbrt(num);       // Raíz cúbica
+      return Number.isInteger(sqrt) && Number.isInteger(cbrt); // Ambas deben ser enteras
+    };
+  
+    const results = numbers.filter(isSquareAndCube);
+    
+    // Retornamos los resultados separados por comas
+    return results.join(", ");
+  }
+
+  if (/What is (\d+) minus (\d+)\?/.test(query)) {
+    // Extraemos los dos números de la pregunta usando la expresión regular
+    const match = query.match(/What is (\d+) minus (\d+)\?/);
+    if (match) {
+      const [, num1, num2] = match;
+      
+      // Convertimos los números extraídos a enteros y calculamos la suma
+      const minus = parseInt(num1, 10) - parseInt(num2, 10);
+      
+      return minus.toString(); // Retornamos el resultado como una cadena
+    }
+  }
+  
+  
+  
+  
   
   
   
